@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
           content: commentForm.elements["comment"].value
         })
       }
-      fetch(commentsURL, params).then(resp => resp.json()).then(newComment => displayComment(newComment))
+      fetch(commentsURL, params).then(resp => resp.json()).then(newComment => displayComment(newComment)).then(commentForm.reset())
     }
   })
 
