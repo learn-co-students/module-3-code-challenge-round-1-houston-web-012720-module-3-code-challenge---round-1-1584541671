@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(image)
   })
 
+  
   function showImage(image){
     img.src = image.url
     h4.innerText = image.name
