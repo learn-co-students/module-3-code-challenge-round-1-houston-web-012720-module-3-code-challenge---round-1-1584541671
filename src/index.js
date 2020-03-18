@@ -18,18 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showImage(image){
     
-    img = document.getElementById("image")
+    const img = document.getElementById("image") // if you name this variable image it messes you all up for like half the code challenge!!!
     img.src =  image.url
    
-    h4 = document.getElementById("name")
+    const h4 = document.getElementById("name")
     h4.innerText = image.name
     
-    comments = document.getElementById("comments")
+    const comments = document.getElementById("comments")
 
-    span = document.getElementById('likes')
+    const span = document.getElementById('likes')
     span.innerText = image.like_count
 
-    form = document.getElementById("comment_form")
+    const form = document.getElementById("comment_form")
 
     form.addEventListener("submit", () =>{
       event.preventDefault()
