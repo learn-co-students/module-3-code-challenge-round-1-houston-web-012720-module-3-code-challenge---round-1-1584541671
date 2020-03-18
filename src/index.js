@@ -22,15 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   commentForm.addEventListener("submit", (e) => {
     e.preventDefault()
-    params ={
-      method: "POST",
-      headers: { 'Accept': 'application/json','Content-Type': 'application/json'},
-      body: JSON.stringify({
-        image_id: parseInt(img.getAttribute("data-id")), 
-        content: commentForm.elements["comment"].value
-      })
+    if (!!commentForm.elements["comment"].value){  //check if comment field not empty
+      params ={
+        method: "POST",
+        headers: { 'Accept': 'application/json','Content-Type': 'application/json'},
+        body: JSON.stringify({
+          image_id: parseInt(img.getAttribute("data-id")), 
+          content: commentForm.elements["comment"].value
+        })
+      }
+      fetch(commentsURL, params).then(resp => resp.json()).then(newComment => displayComment(newComment))
     }
-    fetch(commentsURL, params).then(resp => resp.json()).then(newComment => displayComment(newComment))
   })
 
   function renderData(data){
@@ -45,9 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displayComment(comment){
     const li = document.createElement("li")
+    li.className = "list-group-item d-flex justify-content-between align-items-center"
     li.innerText = comment.content
     const dltBtn = document.createElement("button")
     dltBtn.innerText = "Delete"
+    dltBtn.className = "badge badge-primary badge-pill"
     dltBtn.addEventListener("click", () => {
       fetch(`https://randopic.herokuapp.com/comments/${comment.id}`, {method: "DELETE"}).then(li.remove())
     })
